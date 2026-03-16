@@ -113,3 +113,12 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+/* 允许输入框正常工作 */
+input, textarea {
+  -webkit-user-select: text;
+}

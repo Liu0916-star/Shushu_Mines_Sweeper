@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Flag, Bomb, Heart } from 'lucide-react';
+import { useLongPress } from 'use-long-press';
 
 const NUMBER_COLORS = [
   '',
@@ -15,8 +16,10 @@ const NUMBER_COLORS = [
 ];
 
 export default function Cell({ cell, row, col, onClick, onRightClick, onDoubleClick, gameState, cellSize, theme }) {
+  
+  // 1. 定义事件处理函数
   const handleContextMenu = useCallback((e) => {
-    e.preventDefault();
+    e?.preventDefault();
     onRightClick(row, col);
   }, [row, col, onRightClick]);
 
@@ -28,9 +31,22 @@ export default function Cell({ cell, row, col, onClick, onRightClick, onDoubleCl
     onDoubleClick(row, col);
   }, [row, col, onDoubleClick]);
 
+  // 2. 配置长按逻辑 (适配手机端插旗)
+  const bind = useLongPress(() => {
+    // 只有在游戏进行中且格子没翻开时，长按才插旗
+    if (!cell.isRevealed && gameState === 'playing') {
+      onRightClick(row, col);
+    }
+  }, {
+    threshold: 500,        // 长按 0.5 秒触发
+    capturePos: true,      // 提高移动端响应精准度
+    cancelOnMovement: 20,  // 手指滑动超过 20px 则取消，防止滚屏时误触
+  });
+
   const isGameOver = gameState === 'won' || gameState === 'lost';
   const themeColor = theme?.color || '#f43f5e';
 
+  // 3. 渲染逻辑
   if (cell.isRevealed) {
     return (
       <motion.div
@@ -64,15 +80,16 @@ export default function Cell({ cell, row, col, onClick, onRightClick, onDoubleCl
 
   return (
     <motion.button
+      {...bind()} // 重点：将长按绑定到按钮上
       whileHover={!isGameOver ? { scale: 1.08, y: -2 } : {}}
       whileTap={!isGameOver ? { scale: 0.92 } : {}}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
       onDoubleClick={handleDoubleClick}
       disabled={isGameOver}
-      className="flex items-center justify-center rounded-lg select-none transition-shadow duration-200 backdrop-blur-sm border shadow-sm hover:shadow-md disabled:hover:shadow-sm disabled:hover:scale-100 active:shadow-inner"
-      style={{ 
-        width: cellSize, 
+      className="flex items-center justify-center rounded-lg select-none transition-shadow duration-200 backdrop-blur-sm border shadow-sm hover:shadow-md"
+      style={{
+        width: cellSize,
         height: cellSize,
         background: `linear-gradient(135deg, ${themeColor}33, ${themeColor}1a)`,
         borderColor: themeColor + '66'

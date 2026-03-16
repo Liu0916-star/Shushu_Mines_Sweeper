@@ -105,7 +105,7 @@ export default function Game() {
             <Heart className="w-5 h-5" style={{ color: currentTheme.color, fill: currentTheme.color }} />
           </div>
           <p className="text-sm font-medium tracking-wide" style={{ color: currentTheme.color, opacity: 0.7 }}>
-            专属于你的小游戏 ✨
+            专属于你一人 ✨
           </p>
           <p className="text-xs mt-1 font-medium" style={{ color: currentTheme.color, opacity: 0.6 }}>
             今天也要开心哦 💕

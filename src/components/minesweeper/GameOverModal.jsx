@@ -93,9 +93,9 @@ export default function GameOverModal({ gameState, time, onReset, showDachshund,
                   <Frown className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">
-                  哎呀，踩到雷啦舒舒～
+                  哎呀，踩到雷啦舒舒🥹～
                 </h2>
-                <p className="text-slate-500 mb-6">没关系舒舒，再来一次！</p>
+                <p className="text-slate-500 mb-6">没关系舒舒，再来一次！🥰</p>
               </>
             )}
             <Button

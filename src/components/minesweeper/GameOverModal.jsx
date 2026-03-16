@@ -95,11 +95,12 @@ export default function GameOverModal({ gameState, time, onReset, showDachshund,
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">
                   哎呀，踩到雷啦舒舒🥹～
                 </h2>
-                <p className="text-slate-500 mb-6">没关系舒舒，再来一次！🥰</p>
+                <p className="text-slate-500 mb-6">没关系舒舒，再来一次🥰！</p>
               </>
             )}
             <Button
-              onClick={onReset}
+              o
+              nClick={onReset}
               className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white rounded-full px-8 py-2 shadow-lg shadow-rose-200/50"
             >
               <RotateCcw className="w-4 h-4 mr-2" />

@@ -197,7 +197,7 @@ export default function Game() {
           transition={{ delay: 0.5 }}
           className="mt-5 text-xs text-slate-400 text-center"
         >
-          左键点击翻开 · 右键标记旗帜 · 双击已翻开数字快速翻开周围
+          左键点击翻开 · 右键或长按标记旗帜 · 双击快速翻开周围
         </motion.p>
       </div>
 

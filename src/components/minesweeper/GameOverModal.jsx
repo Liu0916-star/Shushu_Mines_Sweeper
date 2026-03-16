@@ -47,8 +47,8 @@ export default function GameOverModal({ gameState, time, onReset, showDachshund,
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm p-4"
-          onClick={onReset}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+          // 去掉了这里的 onClick={onReset}，防止点弹窗外面也重置，增加确定性
         >
           <motion.div
             initial={{ scale: 0.7, opacity: 0, y: 30 }}
@@ -98,10 +98,13 @@ export default function GameOverModal({ gameState, time, onReset, showDachshund,
                 <p className="text-slate-500 mb-6">没关系舒舒，再来一次🥰！</p>
               </>
             )}
+            
             <Button
-              o
-              nClick={onReset}
-              className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white rounded-full px-8 py-2 shadow-lg shadow-rose-200/50"
+              onClick={(e) => {
+                e.stopPropagation();
+                onReset();
+              }}
+              className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white rounded-full px-8 py-2 shadow-lg shadow-rose-200/50 active:scale-95 transition-transform"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
               再来一局
